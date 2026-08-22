@@ -23,15 +23,14 @@ jobs:
       with:
         channel: 'stable'
 
-    - name: Setup Project Architecture
+    - name: Create Base Project Structures
       run: |
-        if [ -f "lib/main.dart" ]; then
-          cp lib/main.dart main_backup.dart
-        fi
         flutter create . --org com.jmphotoshop --project-name jm_photo_shop --overwrite
-        if [ -f "main_backup.dart" ]; then
-          cp main_backup.dart lib/main.dart
-        fi
+
+    - name: Restore App Code & Config
+      run: |
+        git checkout HEAD -- lib/main.dart
+        git checkout HEAD -- pubspec.yaml
 
     - name: Install Dependencies
       run: flutter pub get
