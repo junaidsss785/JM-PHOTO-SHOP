@@ -23,6 +23,10 @@ jobs:
       with:
         channel: 'stable'
 
+    - name: Create Complete Flutter Project Structure
+      run: |
+        flutter create . --org com.jmphotoshop --project-name jm_photo_shop --overwrite
+
     - name: Install Dependencies
       run: flutter pub get
 
@@ -34,4 +38,3 @@ jobs:
       with:
         name: JM-Photo-Shop-APK
         path: build/app/outputs/flutter-apk/app-release.apk
-        
