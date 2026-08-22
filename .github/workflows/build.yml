@@ -10,9 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout Repository
+      uses: actions/checkout@v3
 
-    - name: Set up Java
+    - name: Set up Java 17
       uses: actions/setup-java@v3
       with:
         distribution: 'zulu'
@@ -23,33 +24,20 @@ jobs:
       with:
         channel: 'stable'
 
-    - name: Create Base Project Structures
+    - name: Initialize Android Project
       run: |
         flutter create . --org com.jmphotoshop --project-name jm_photo_shop --overwrite
+        git checkout lib/main.dart
+        git checkout pubspec.yaml
 
-    - name: Restore App Code & Config
-      run: |
-        git checkout HEAD -- lib/main.dart
-        git checkout HEAD -- pubspec.yaml
-
-    - name: Install Dependencies
+    - name: Get Dependencies
       run: flutter pub get
 
     - name: Build APK
       run: flutter build apk --release
 
-    - name: Upload APK Artifact
-      uses: actions/upload-artifact@v4
+    - name: Save APK File
+      uses: actions/upload-artifact@v3
       with:
         name: JM-Photo-Shop-APK
         path: build/app/outputs/flutter-apk/app-release.apk
-
-    - name: Build APK
-      run: flutter build apk --release
-
-    - name: Upload APK Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: JM-Photo-Shop-APK
-        path: build/app/outputs/flutter-apk/app-release.apk
-        
