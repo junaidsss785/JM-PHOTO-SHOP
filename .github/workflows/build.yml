@@ -23,12 +23,15 @@ jobs:
       with:
         channel: 'stable'
 
-    - name: Restore Main Dart Code
+    - name: Setup Project Architecture
       run: |
-        mkdir -p temp_backup
-        cp lib/main.dart temp_backup/main.dart
+        if [ -f "lib/main.dart" ]; then
+          cp lib/main.dart main_backup.dart
+        fi
         flutter create . --org com.jmphotoshop --project-name jm_photo_shop --overwrite
-        cp temp_backup/main.dart lib/main.dart
+        if [ -f "main_backup.dart" ]; then
+          cp main_backup.dart lib/main.dart
+        fi
 
     - name: Install Dependencies
       run: flutter pub get
@@ -41,3 +44,4 @@ jobs:
       with:
         name: JM-Photo-Shop-APK
         path: build/app/outputs/flutter-apk/app-release.apk
+        
