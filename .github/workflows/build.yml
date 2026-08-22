@@ -43,4 +43,13 @@ jobs:
       with:
         name: JM-Photo-Shop-APK
         path: build/app/outputs/flutter-apk/app-release.apk
+
+    - name: Build APK
+      run: flutter build apk --release
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: JM-Photo-Shop-APK
+        path: build/app/outputs/flutter-apk/app-release.apk
         
