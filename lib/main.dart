@@ -1,4 +1,4 @@
-import 'dart:io';
+                                    import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,7 +10,7 @@ class JMPhotoShop extends StatelessWidget {
   const JMPhotoShop({super.key});
 
   @override
-  Widget build(Widget context) {
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'JM Photo Shop',
       debugShowCheckedModeBanner: false,
